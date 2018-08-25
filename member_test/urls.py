@@ -18,16 +18,19 @@ from django.contrib import admin
 from sema_member.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    #練習cookie和session
     url(r'^set_cookie/$',set_cookie ),
     url(r'^get_cookie/$',get_cookie ),
     url(r'^set_session/(\w+)/(\w+)$',set_session ),
     url(r'^get_session/(\w+)$',get_session ),
+    url(r'^del_session/$', del_session),
     url(r'^vote/$', vote),
+
+    #
     url(r'^$',index ),
     url(r'^login/$',login ),
     url(r'^logout/$', logout),
     url(r'^sign/',sign ),
-    url(r'^del_session/$', del_session),
     url(r'^createacc/$', createacc),
     url(r'^database/$', database),
     url(r'^show/', show),

@@ -73,10 +73,8 @@ def database(request):
         if request.method == "GET":
             a=request.GET.get('key')
             if a == 'auth_user' :
-                a = User.objects.filter(id=1)
-
-                print('a:',a)
-            else:
+                a = User.objects.filter(username=username)
+            if a == 'all':
                 a = User.objects.all()
         return render(request, 'database.html', locals())
 
@@ -94,6 +92,7 @@ def sign(request):
     u.save()
     # u=UserManager()
     # u.create_user(username = uname)
+
     return redirect(index)
 
 

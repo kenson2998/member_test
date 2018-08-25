@@ -63,7 +63,7 @@ function updateMsg() {
          var name = $('.header.item').text();
          console.log(nna,name);
          if (nna==name){
-           $( this).parent().css("background-color", "rgba(139, 206, 249, 0.9)");
+           $( this).parent().css("background-color", "rgba(139, 206, 249, 0.9)"); //如果是該使用者的訊息會用顏色標記
          }
 });
 };
@@ -72,17 +72,17 @@ function updateMsg() {
   .popup()
 ;
     updateMsg();    //更新消息
-            //表单 submit 事件
+            //form表單 submit 事件
     $("#chatForm").submit(function() {
-        //ajax 提交表单
+        //ajax submit post 到 /msg 
         $.post("/msg/",
             $('#chatForm').serialize(),
         function() {
-        $("#content").val("");  //消息发送成功后清空内容框
+        $("#content").val("");  //訊息發送清空輸入框
 
         });
 
-        return false;       //阻止表单提交
+        return false;       //阻止POST動作
     });
 });
 

@@ -5,7 +5,7 @@
 
      <form action="/database/" method="GET">{% csrf_token %}
         <div class="ui menu">
-            <div class="header item">項目:</div>
+            <div class="header item">查詢項目:</div>
             <div class="left menu">
               <div class="ui selection dropdown">
                 <input type="hidden" name="key" value="{{ key }}">
@@ -13,8 +13,8 @@
 
                 <div class="default text">選擇...</div>
                 <div class="menu">
-                    <div class="item" data-value="auth_user">用戶資料</div>
-                    <div class="item" data-value="0">0</div>
+                    <div class="item" data-value="auth_user">{{ username }}的資料</div>
+                    <div class="item" data-value="all">用戶資料</div>
                 </div>
               </div>
                     <button class="ui button" type="submit"/>發送</button>
@@ -40,7 +40,7 @@
       <td>{{i.id}}</td>
       <td>{{i.username}}</td>
       <td >{{i.email}}</td>
-      <td>{{i.date_joined}}</td>
+      <td>{{i.date_joined | date:'Y年 m月d H:i'}}</td>
       </tr>
       {% endfor %}
 
