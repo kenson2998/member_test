@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}聊天室{% endblock %}
+{% block content %}
+<!--聊天框-->
+{#<div class="list-group col-md-10 col-md-offset-1 well" style="overflow-y:auto; max-height: 300px;">#}
+{#    <div class="list-group-item"　>#}
+{#{% for chat in chats %}#}
+{#    <h4 class="list-group-item-heading">{{chat.sender}}:{{chat.content}}</h4>#}
+{#    <p class="list-group-item-text">{{chat.time}}</p>#}
+{#    <input type="hidden" class="chat_id" value="{{chat.id}}"/>#}
+{#    <br>#}
+{#{% endfor %}#}
+{#    </div>#}
+{#</div>#}
+<div class="ui container">
+<div class="ui celled list" style="overflow-y:auto; max-height: 300px;max-width: 500px;">
+
+{% for chat in chats %}
+
+   <div class="item">{{chat.sender}}
+    <img class="ui avatar image" src="https://semantic-ui.qyears.com/images/avatar/small/daniel.jpg"
+    data-title="{{chat.sender}}" data-content="發言時間: {{chat.time | date:'m/d H:i' }}" >
+    <div class="content">
+      <div class="header" >
+      {{chat.content}}</div>
+    </div>
+   <input type="hidden" class="chat_id" value="{{chat.id}}"/>
+  </div>
+
+    {% endfor  %}
+
+  </div>
+
+
+
+    <!--表单-->
+<form id="chatForm" class="form-horizontal panel container" method="POST" action="." >{% csrf_token %}
+    <div class="ui input">
+        <textarea type="text" name="content" id="content" value="" class="form-control" id="exampleMessage" placeholder=""></textarea>
+    </div>
+    <div class="form-group col-md-4">
+        <input type="hidden" name="post_type" value="send_chat"/>
+        <button class="ui button" type="submit" class="btn btn-lg btn-primary">送出訊息</button>
+    </div>
+</form>
+</div>
+
+<script type="text/javascript" language="javascript">
+//更新消息
+function updateMsg() {
+    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' }});
+    $.post("/fresh/",
+        {
+        last_chat_id: $(".chat_id").first().val(),
+        },function(data) {
+        var cont = $('.ui.celled.list').html();
+{#         $('.ui.celled.list').html(data+cont);    //解析返回的 xml#}
+            $('.ui.celled.list').prepend(data);
+    });
+    setTimeout("updateMsg()", 1000);        //每秒更新一次
+    $( ".ui.avatar.image" ).each(function( index ) {
+         var nna = $( this).attr('data-title');
+         var name = $('.header.item').text();
+         console.log(nna,name);
+         if (nna==name){
+           $( this).parent().css("background-color", "rgba(139, 206, 249, 0.9)");
+         }
+});
+};
+ $(document).ready(function() {
+     $('.ui.avatar.image')
+  .popup()
+;
+    updateMsg();    //更新消息
+            //表单 submit 事件
+    $("#chatForm").submit(function() {
+        //ajax 提交表单
+        $.post("/msg/",
+            $('#chatForm').serialize(),
+        function() {
+        $("#content").val("");  //消息发送成功后清空内容框
+
+        });
+
+        return false;       //阻止表单提交
+    });
+});
+
+</script>
+
+
+ {% endblock %}

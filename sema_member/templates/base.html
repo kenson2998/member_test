@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>{% block title %}給個標題{% endblock %}</title>
+        <link rel="stylesheet" href="\static\css\semantic.min.css" />
+        <script type='text/javascript' src="\static\js\jquery.min.js"></script>
+        <script type='text/javascript' src="\static\js\semantic.min.js"></script>
+
+	</head>
+
+	<body >
+<div class="ui top attached demo menu">
+  <a class="item"  onclick="toggleSidebar1()"><i class="sidebar icon"></i> 主選單 </a>
+    <div class="right menu">
+    {% if username == "訪客" %}
+    <div class="header item"><i class="spy icon"></i>{{ username }}</div>
+    <a href="/login/" class="item"><i class="hand peace icon"></i>登入</a>
+    {% else %}
+    <div class="header item"><i class="user icon"></i>{{ username }}</div>
+    <a href="/logout/" class="item"><i class="hand paper icon"></i>登出</a>
+     {% endif %}
+
+
+    </div>
+</div>
+<div id="meaus">
+ <div class="ui bottom nine item icon sidebar menu visible inverted" >
+{# <div class="ui thin sidebar inverted vertical menu " >#}
+     {% if username == "訪客" %}
+  <a class="item" href="/login/">訪客請先登入</a>
+     {% else %}
+  <a class="item" href="/database/"><i class="database icon"></i>資料庫</a>
+         <a class="item" href="/index2/"><i class="database icon"></i>聊天室</a>
+     {% endif %}
+
+  <a class="item" href="/"><i class="home icon"></i>回首頁</a>
+</div>
+
+       {% block content %}另一個使用content的內容{% endblock %}
+</div>
+	</body>
+<script>
+ function toggleSidebar() {
+        $('#meaus .ui.sidebar')
+            .sidebar({context: $('#meaus')})
+            .sidebar('setting', 'transition', 'overlay')
+            .sidebar('toggle');
+    }
+ function toggleSidebar1() {
+     $('#meaus .ui.bottom').toggleClass('visible');
+    }
+</script>
+
+
+</html>

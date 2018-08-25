@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ssh://wonderful@192.168.8.22:22/home/wonderful/.virtualenvs/mario_venv/bin/python" name="ssh://wonderful@192.168.8.22:22/home/wonderful/.virtualenvs/mario_venv/bin/python">
+        <fileTransfer host="192.168.8.22" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

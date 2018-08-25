@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}TWIT-智能測試{% endblock %}
+ {% block content %}
+<form action="/login/" method="POST" name="form1">
+    {% csrf_token %}
+    {% if status == "login" %}
+    <div><a href="/logout/">登出系統</a></div>
+    {% else %}
+    <div>account:<input type="text" name="username" id="username"/></div>
+    <div>password:<input type="password" name="password" id="password"/></div>
+    <div><input type="submit" name="button" id="button" value="登入"/></div>
+    {% endif %}
+    <span style="color:red">{{ message }}</span>
+</form>
+ {% endblock %}

@@ -1,0 +1,20 @@
+{#{% for chat in chats %}#}
+{#    <h4 class="list-group-item-heading">{{chat.sender}}:{{chat.content}}</h4>#}
+{#    <p class="list-group-item-text">{{chat.time}}</p>#}
+{#    <input type="hidden" class="chat_id" value="{{chat.id}}"/>#}
+{#    <br>#}
+{#{% endfor %}#}
+{% for chat in chats %}
+
+   <div class="item">{{chat.sender}}
+    <img class="ui avatar image" src="https://semantic-ui.qyears.com/images/avatar/small/daniel.jpg"
+    data-title="{{chat.sender}}" data-content="發言時間:{{chat.time |date:'m/d H:i'}}" >
+    <div class="content">
+      <div class="header" >
+      {{chat.content}}</div>
+    </div>
+   <input type="hidden" class="chat_id" value="{{chat.id}}"/>
+  </div>
+
+    {% endfor  %}
+

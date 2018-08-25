@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}首頁{% endblock %}
+ {% block content %}
+<div class="ui container">
+<div class="ui info tiny message"> <i class="close icon"></i>
+{% if username == "訪客" %}
+  請先登入帳號才能觀看內容哦~
+{% else %}
+  您好~{{ username}}
+
+{% endif %}
+</div>
+    </div>
+{% if username == "訪客" %}
+    <form class="ui form" action="/sign/" method="POST">{% csrf_token %}
+    <div class="ui text container">
+  <div class="ui  segment">
+  <div class="ui  form">
+     <h3 class="ui block header">註冊帳號</h3>
+    <div class="two fields">
+      <div class="field">
+        <label>帳號:</label>
+        <input placeholder="username" name="username" type="text">
+      </div>
+      <div class="field">
+        <label>密碼:</label>
+        <input type="password" name="password" placeholder="密碼">
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <label>email:</label>
+        <input placeholder="email" name="email" type="email">
+      </div>
+    </div>
+      <div class="ui error message"></div>
+      <button class="ui submit button" type="submit"/> 提交</button>
+  </div>
+</div>
+</div>
+</form >
+    <div class="ui celled list">
+
+        <div class="item">
+        <img class="ui avatar image" src="https://semantic-ui.qyears.com/images/avatar/small/helen.jpg">
+        <div class="content">
+        <div class="header">Snickerdoodle</div>
+        An excellent companion
+        </div>
+        </div>
+        <div class="item">
+        <img class="ui avatar image" src="https://semantic-ui.qyears.com/images/avatar/small/daniel.jpg">
+        <div class="content">
+        <div class="header">Poodle</div>
+        A poodle, its pretty basic
+        </div>
+        </div>
+    {% for i in a %}
+
+   <div class="item">
+    <img class="ui avatar image" src="https://semantic-ui.qyears.com/images/avatar/small/daniel.jpg">
+    <div class="content">
+      <div class="header">{i.Chat_ID}</div>
+      {i.Chat_text}
+    </div>
+  </div>
+
+    {% endfor  %}
+
+    </div>
+    <div class="ui input">
+      <input placeholder="搜索..." type="text">
+    </div>
+
+{% endif %}
+<script>
+$('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
+;
+
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '請輸入你的E-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : '請輸入正確的 E-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '請輸入您的密碼~'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : '密碼未達6個字元'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+</script>
+<link rel="stylesheet" type="text/css" href="https://semantic-ui.com/dist/components/message.css">
+ {% endblock %}

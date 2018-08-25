@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}資料庫{% endblock %}
+ {% block content %}
+
+
+     <form action="/database/" method="GET">{% csrf_token %}
+        <div class="ui menu">
+            <div class="header item">項目:</div>
+            <div class="left menu">
+              <div class="ui selection dropdown">
+                <input type="hidden" name="key" value="{{ key }}">
+                <i class="dropdown icon"></i>
+
+                <div class="default text">選擇...</div>
+                <div class="menu">
+                    <div class="item" data-value="auth_user">用戶資料</div>
+                    <div class="item" data-value="0">0</div>
+                </div>
+              </div>
+                    <button class="ui button" type="submit"/>發送</button>
+            </div>
+
+        </div>
+    </form>
+<div class="ui divider"></div>
+<div class="ui container">
+<td class="ui segments">
+
+<table class="ui celled center aligned table">
+  <thead>
+    <tr><th>id</th>
+    <th>帳號</th>
+    <th>email</th>
+    <th>註冊時間</th>
+  </tr></thead>
+  <tbody>
+
+      {% for i in a %}
+      <tr>
+      <td>{{i.id}}</td>
+      <td>{{i.username}}</td>
+      <td >{{i.email}}</td>
+      <td>{{i.date_joined}}</td>
+      </tr>
+      {% endfor %}
+
+  </tbody>
+
+</table>
+</div>
+</div>
+
+<script type="text/javascript" language="javascript">
+$(document).ready(  function(){
+    $('.ui.dropdown').dropdown();
+
+{#  $("#myInput").on("keyup", function() {#}
+{#    var value = $(this).val().toLowerCase();#}
+{#    $("#myTable tr").filter(function() {#}
+{#      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)#}
+{#    });#}
+{#  });#}
+
+
+
+});
+
+
+
+
+
+</script>
+ {% endblock %}
