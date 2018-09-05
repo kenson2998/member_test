@@ -1,15 +1,5 @@
 # member_test
 Django使用session會員登入,以及簡單的ajax聊天室
-
-執行Django:
->python manage.py runserver localhost:80
-
-開啟瀏覽器進入網址: http://localhost
-
-可以立刻註冊一個帳號，建立後右上角登入後，就記錄在session裡面，下次訪問時就會檢查session是否有存留。
-
-更換瀏覽器訪問和按下登出或是runserver重啟，就會清除session資料。  
-  
 ## 訪客首頁  
 ![](https://raw.githubusercontent.com/kenson2998/member_test/master/img/member_1.jpg)
 ## 註冊判斷輸入的帳號、密碼、Email判斷  
@@ -23,6 +13,16 @@ Django使用session會員登入,以及簡單的ajax聊天室
 ![](https://raw.githubusercontent.com/kenson2998/member_test/master/img/member_5.jpg)
 ## 判斷自己的留言會顯示 藍色框底，清楚自己發訊息有哪些，移到上面可以看到留言時間。
 ![](https://raw.githubusercontent.com/kenson2998/member_test/master/img/member_6.jpg)
+執行Django:
+>python manage.py runserver localhost:80
+
+開啟瀏覽器進入網址: http://localhost
+
+可以立刻註冊一個帳號，建立後右上角登入後，就記錄在session裡面，下次訪問時就會檢查session是否有存留。
+
+更換瀏覽器訪問和按下登出或是runserver重啟，就會清除session資料。  
+  
+
 
 # 英雄資料demo
 ![](https://raw.githubusercontent.com/kenson2998/member_test/master/img/champ_demo3.jpg)
@@ -101,6 +101,29 @@ champ-jpg1.html 主要呈現技能的部分
 
 {% endfor %}
 ```
+champ-jpg1.html 造型資料呈現部分。
+```
+<div class="slideshow-container">
+    {% for skin in resp.skins %}
+        <div class="mySlides fade">
+            <div class="numbertext">{{ skin.num|add:"1" }} / {{ resp.skins|length }}</div>
+            <img class="nature loading" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{champ}}_{{skin.num}}.jpg" >
+            <div class="text"> {% if skin.name == "default" %} 原造型{% else %}{{skin.name}}{% endif %}</div>
+        </div>
+    {% endfor %}
 
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+    <br>
+
+    <div style="text-align:center">
+        {% for skin in resp.skins %}
+          <span class="dot" onclick="currentSlide({{ skin.num|add:"1" }})"></span>
+        {% endfor %}
+    </div>
+```
 ![](https://raw.githubusercontent.com/kenson2998/member_test/master/img/champ_demo1.jpg)
+
 ![](https://raw.githubusercontent.com/kenson2998/member_test/master/img/champ_demo2.jpg)
