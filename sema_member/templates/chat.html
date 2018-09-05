@@ -54,7 +54,7 @@ function updateMsg() {
         last_chat_id: $(".chat_id").first().val(),
         },function(data) {
         var cont = $('.ui.celled.list').html();
-{#         $('.ui.celled.list').html(data+cont);    //解析返回的 xml#}
+{#         $('.ui.celled.list').html(data+cont);   #}  //解析返回的 xml
             $('.ui.celled.list').prepend(data);
     });
     setTimeout("updateMsg()", 1000);        //每秒更新一次

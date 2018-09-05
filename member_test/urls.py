@@ -37,4 +37,6 @@ urlpatterns = [
     url(r'^chatroom/', chatroom),
     url(r'^fresh/', fresh),
     url(r'^msg/', msg),
+    url(r'^champ/',champ_know ),
+    url(r'^champ_p/', champ_p)
     ]

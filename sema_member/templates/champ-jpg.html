@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% block title %}英雄資料demo{% endblock %}
+ {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}'}});
+    $.get("/champ_p/",{chname: $('.aicon').attr('al')},
+        function(data){
+        $('#ch_cont').html(data);
+    });
+});
+</script>
+
+<style>
+.skill{
+    width: 40px;
+    height: 40px;
+}
+.loading{
+    width: 607px;
+    height: 358px;
+}
+</style>
+
+<!---主框架--->
+<section id="one" class="wrapper style1" >
+    <h1 class="index-title"  >英雄資料demo</h1>
+    <div class='aicon' al='{{champ}}'></div>
+    <div id="ch_cont">
+        <div class="ui active inverted dimmer">
+        <div class="ui text loader">加载中</div>
+        </div>
+    </div>
+</section >
+{% endblock %}
+

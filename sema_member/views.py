@@ -161,3 +161,28 @@ def vote(request):
 
     response = HttpResponse(request.session["vote"])
     return response
+
+
+def champ_know (request):
+    champ='Elise'
+    return render(request, 'champ-jpg.html',locals())
+
+def champ_p(request):
+    import requests
+    import json
+    dd_ver = '8.17.1'
+    if 'chname' in request.GET :
+        champ=request.GET.get('chname')
+    httml = ['https://ddragon.leagueoflegends.com/cdn/' + dd_ver + '/data/zh_TW/champion.json',
+             'https://ddragon.leagueoflegends.com/cdn/' + dd_ver + '/data/zh_TW/champion/'+champ+'.json',
+             'https://ddragon.leagueoflegends.com/cdn/' + dd_ver + '/img/sprite/spell0.png',
+             'https://ddragon.leagueoflegends.com/cdn/' + dd_ver +'/img/spell/',
+             'https://ddragon.leagueoflegends.com/cdn/' + dd_ver + '/img/passive/Aatrox_Passive.AatroxUpdate.png',
+             'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/'+champ+'_0.jpg'
+             ]
+    s_url='https://ddragon.leagueoflegends.com/cdn/' + dd_ver +'/img/spell/'
+    pa_url='https://ddragon.leagueoflegends.com/cdn/' + dd_ver +'/img/passive/'
+    req = requests.get(httml[1])
+    resp = json.loads(req.text)
+    resp = resp['data'][champ]
+    return render(request, 'champ-jpg1.html',locals())
